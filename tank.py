@@ -16,12 +16,12 @@
 #as of now we have are not collaborating it with buttons
 
 
-so we have a menu system
+#so we have a menu system
 
 
-class tank_display:
+class driver_view_channel:
 	def __init__(self):
-		print "tank class started"
+		print "driver viewer unit started"
 
 	def rpm(self):
 		print "get the rpm"
@@ -33,7 +33,18 @@ class tank_display:
 		print "get the engine power"
 
 
-class commander:
+class driver:
+	def __init__(self):
+		print "driver class started"
+
+	def give_fire_warning(self):
+		print "all the chamber red light starts to blink"
+
+	def claok_sun_panels(self):
+		print "covered the solar panels to reduce damage"
+
+
+class commander_view_channel:
 	def __init__(self):
 		print "commander class started"
 
@@ -55,14 +66,35 @@ class commander:
 	def get_gunner_angle(self):
 		print "show gunner view angle"
 
-class driver:
+	def get_arm_selected(self):
+		print "show the weapon details selected"
+
+	def change_arm(self):
+		print "which arm to select"
+
+	def select_movement(self):
+		print "by default slow using pid equation"
+		print "which mode do u want"
+
+	def get_movement(self):
+		print "the method of turrent movement"
+
+class commander_get_display_unit:
 	def __init__(self):
-		print "driver class started"
+		print "the display of commander started"
 
-	def give_fire_warning(self):
-		print "all the chamber red light starts to blink"
+	def get_turrent_angle(self):
+		print "get the current tank turret angle"
 
-	def claok_sun_panels(self):
-		print "covered the solar panels to reduce damage"
+	def get_commander_viewpoint(self):
+		print "get the angle at which commander is viewing"
 
-	def 
+	def get_gunner_view(self):
+		print "show on the screen the view that the gunner is currently seeing"
+
+	def get_arm_selected(self):
+		print "show the weapon details selected"
+
+	def get_movement(self):
+		print "the method of turrent movement"
+
