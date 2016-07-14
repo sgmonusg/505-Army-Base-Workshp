@@ -17,20 +17,33 @@
 
 
 #so we have a menu system
-
+fire=int(0)
+cloak=int(0)
 
 class driver_view_channel:
 	def __init__(self):
 		print "driver viewer unit started"
 
 	def rpm(self):
-		print "get the rpm"
+		return "get the rpm"
 	def speed(self):
-		print "get the speed"
+		return "get the speed"
 	def gear(self):
-		print "get the gear"
+		return "get the gear"
 	def engine_power(self):
-		print "get the engine power"
+		return "get the engine power"
+	def get_fire_warning(self):
+		print fire
+		if(fire==1):
+			return "true"
+		else:
+			return "false"
+	def get_solar_panel_status(self):
+		print cloak
+		if(cloak==1):
+			return "true"
+		else:
+			return "false"
 
 
 class driver:
@@ -71,6 +84,33 @@ class commander_view_channel:
 
 	def change_arm(self):
 		print "which arm to select"
+		print "*************************************************************************"
+		print "option_available"
+		print "press 1 for anti tank gun "
+		print "press 2 for range missile"
+		print "press 3 for machine gun "
+		print "*************************************************************************"
+		x=int(raw_input("enter ur option"))
+
+		while (x!=-14642):	
+			if (x==1):
+				print "anti tank gun selected"
+				break
+			elif (x==2):
+				print "range missile selected"
+				break
+			elif(x==3):
+				print "machine gun selected"
+				break
+			else 
+				print "wrong input"
+				print "*************************************************************************"
+				print "option_available"
+				print "press 1 for anti tank gun "
+				print "press 2 for range missile"
+				print "press 3 for machine gun "
+				print "*************************************************************************"
+				x=int(raw_input("enter ur option"))
 
 	def select_movement(self):
 		print "by default slow using pid equation"
@@ -97,4 +137,77 @@ class commander_get_display_unit:
 
 	def get_movement(self):
 		print "the method of turrent movement"
+
+
+def menu():
+	print "*************************************************************************"
+	print "				main interface console								"
+	print "what do u want"
+	print "press one for driver"
+	print "press two for gunner"
+	print "press three for commander"
+	print "**************************************************************************"
+	x=raw_input("enter ur number ")
+	return x
+
+
+
+def menu1():
+	print "***************************************************************************"
+	print "			Driver Interface console								"
+	driver_view=driver_view_channel()
+	print driver_view.rpm()
+	print driver_view.speed()
+	print driver_view.gear()
+	print driver_view.engine_power()
+	print driver_view.get_fire_warning()
+	print driver_view.get_solar_panel_status()
+	print "press 1 for fire Warning in manual mode"
+	print "press 2 for cloak solar panels in manual mode"
+	print "press 3 for closing fire Warning in manual mode"
+	print "press 4 for closing cloak solar panels in manual mode"
+	print "press 5 to exit driver mode"
+	print "****************************************************************************"
+	x=int(raw_input("enter your number"))
+	print "the no u pressed",
+	print x
+	return x
+
+def menu2():
+	print "******************************************************************************"
+	print "		Gunner Interface console								"
+
+
+def main():
+	x=int(menu())
+	print x
+	while (x<4 and x>0):
+		print x
+		while (x==1):
+			#print "you have pressed 1"
+			#print "welcome to driver mode"
+			y=menu1()
+			print y
+			if (y==1):
+				print "in 1"
+				fire=1
+				print fire
+			elif (y==2):
+				cloak=1
+			elif (y==3):
+				fire=0
+			elif (y==4):
+				cloak=0
+			elif (y==5):
+				break
+			else:
+				menu1()
+		while (x==2):
+			y=menu2()
+
+		x=int(menu())
+
+
+if __name__=='__main__':
+	main()
 
