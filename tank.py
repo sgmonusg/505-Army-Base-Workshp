@@ -17,8 +17,8 @@
 
 
 #so we have a menu system
-fire=int(0)
-cloak=int(0)
+fire=0
+cloak=0
 
 class driver_view_channel:
 	def __init__(self):
@@ -33,13 +33,13 @@ class driver_view_channel:
 	def engine_power(self):
 		return "get the engine power"
 	def get_fire_warning(self):
-		print fire
+		#print fire
 		if(fire==1):
 			return "true"
 		else:
 			return "false"
 	def get_solar_panel_status(self):
-		print cloak
+		#print cloak
 		if(cloak==1):
 			return "true"
 		else:
@@ -60,28 +60,13 @@ class driver:
 class commander_view_channel:
 	def __init__(self):
 		print "commander class started"
-
-	def get_turrent_angle(self):
-		print "get the current tank turret angle"
-
-	def get_commander_viewpoint(self):
-		print "get the angle at which commander is viewing"
-
+	
 	def change_turret_angle(self):
 		print "change the angle of turrent from current to the view angle"
-
-	def get_gunner_view(self):
-		print "show on the screen the view that the gunner is currently seeing"
 
 	def override_gunner_angle(self):
 		print "irrespective of what gunner is aimming for the turret moves on commander command"
 	
-	def get_gunner_angle(self):
-		print "show gunner view angle"
-
-	def get_arm_selected(self):
-		print "show the weapon details selected"
-
 	def change_arm(self):
 		print "which arm to select"
 		print "*************************************************************************"
@@ -102,7 +87,7 @@ class commander_view_channel:
 			elif(x==3):
 				print "machine gun selected"
 				break
-			else 
+			else :
 				print "wrong input"
 				print "*************************************************************************"
 				print "option_available"
@@ -111,13 +96,12 @@ class commander_view_channel:
 				print "press 3 for machine gun "
 				print "*************************************************************************"
 				x=int(raw_input("enter ur option"))
+		return x
 
 	def select_movement(self):
 		print "by default slow using pid equation"
 		print "which mode do u want"
 
-	def get_movement(self):
-		print "the method of turrent movement"
 
 class commander_get_display_unit:
 	def __init__(self):
@@ -132,8 +116,11 @@ class commander_get_display_unit:
 	def get_gunner_view(self):
 		print "show on the screen the view that the gunner is currently seeing"
 
-	def get_arm_selected(self):
+	def get_arm_selected(self , gun):
 		print "show the weapon details selected"
+
+	def get_gunner_angle(self):
+		print "show gunner view angle"
 
 	def get_movement(self):
 		print "the method of turrent movement"
@@ -146,6 +133,7 @@ def menu():
 	print "press one for driver"
 	print "press two for gunner"
 	print "press three for commander"
+	print "press four to exit"
 	print "**************************************************************************"
 	x=raw_input("enter ur number ")
 	return x
@@ -173,37 +161,66 @@ def menu1():
 	print x
 	return x
 
+def menu1_cmd(y):
+	if (y==1):
+		#print "in 1"
+		fire=1
+		#print fire
+	elif (y==2):
+		cloak=1
+	elif (y==3):
+		fire=0
+	elif (y==4):
+		cloak=0
+
 def menu2():
 	print "******************************************************************************"
 	print "		Gunner Interface console								"
 
 
+def menu3():
+	print "********************************************************************************"
+	print "		Commander Interface console								"
+	commander=commander_get_display_unit()
+	print commander.get_turrent_angle()
+	print commander.get_commander_viewpoint()
+	print commander.get_gunner_view()
+	print commander.get_gunner_angle()
+	print commander.get_arm_selected()
+	print commander.get_movement()
+	print "press 1 for change turret angle"
+	print "press 2 for override gunner angle"
+	print "press 3 for changing back to gunner's angle"
+	print "press 4 for changing arms"
+	print "press 5 for changing movement of turrent option"
+	print "*******************************************************************************"
+
 def main():
 	x=int(menu())
 	print x
-	while (x<4 and x>0):
+	while (x!=4):
 		print x
 		while (x==1):
 			#print "you have pressed 1"
 			#print "welcome to driver mode"
 			y=menu1()
 			print y
-			if (y==1):
-				print "in 1"
-				fire=1
-				print fire
-			elif (y==2):
-				cloak=1
-			elif (y==3):
-				fire=0
-			elif (y==4):
-				cloak=0
-			elif (y==5):
+			while(y!=5):
+				menu1_cmd(y)
+				y=menu1()
+			if (y==5):
 				break
-			else:
-				menu1()
+
 		while (x==2):
 			y=menu2()
+			while (y!=4):
+				menu2()
+
+		while (x==3):
+			y=menu3()
+			while (y!=5):
+				menu3()
+
 
 		x=int(menu())
 
