@@ -62,11 +62,14 @@ class commander_view_channel:
 		print "commander class started"
 	
 	def change_turret_angle(self):
-		print "change the angle of turrent from current to the view angle"
+		return "change the angle of turrent from current to the view angle"
 
 	def override_gunner_angle(self):
-		print "irrespective of what gunner is aimming for the turret moves on commander command"
+		return "irrespective of what gunner is aimming for the turret moves on commander command"
 	
+	def last_gunner_angle(self):
+		return "last gunners angle"
+
 	def change_arm(self):
 		print "which arm to select"
 		print "*************************************************************************"
@@ -108,22 +111,22 @@ class commander_get_display_unit:
 		print "the display of commander started"
 
 	def get_turrent_angle(self):
-		print "get the current tank turret angle"
+		return "get the current tank turret angle"
 
 	def get_commander_viewpoint(self):
-		print "get the angle at which commander is viewing"
+		return "get the angle at which commander is viewing"
 
 	def get_gunner_view(self):
-		print "show on the screen the view that the gunner is currently seeing"
+		return "show on the screen the view that the gunner is currently seeing"
 
-	def get_arm_selected(self , gun):
-		print "show the weapon details selected"
+	def get_arm_selected(self):
+		return "show the weapon details selected"
 
 	def get_gunner_angle(self):
-		print "show gunner view angle"
+		return "show gunner view angle"
 
 	def get_movement(self):
-		print "the method of turrent movement"
+		return "the method of turrent movement"
 
 
 def menu():
@@ -172,6 +175,8 @@ def menu1_cmd(y):
 		fire=0
 	elif (y==4):
 		cloak=0
+	else:
+		print "wrong input"
 
 def menu2():
 	print "******************************************************************************"
@@ -193,7 +198,28 @@ def menu3():
 	print "press 3 for changing back to gunner's angle"
 	print "press 4 for changing arms"
 	print "press 5 for changing movement of turrent option"
+	print "press 6 to exit"
 	print "*******************************************************************************"
+	y=int(raw_input("enter your number"))
+	return y
+
+
+
+def menu3_cmd(y):
+	commander=commander_view_channel()
+	if(y==1):
+		commander.change_turret_angle()
+	elif(y==2):
+		commander.override_gunner_angle()
+	elif(y==3):
+		commander.last_gunner_angle()
+	elif(y==4):
+		commander.change_arm()
+	elif(y==5):
+		commander.select_movement()
+	else:
+		print "wrong input"
+
 
 def main():
 	x=int(menu())
@@ -218,8 +244,11 @@ def main():
 
 		while (x==3):
 			y=menu3()
-			while (y!=5):
-				menu3()
+			while (y!=6):
+				menu3_cmd(y)
+				y=menu3()
+			if(y==6):
+				break
 
 
 		x=int(menu())
