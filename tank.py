@@ -1,3 +1,17 @@
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+#(at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#/
 #tank System
 
 #tank display unit
@@ -62,7 +76,14 @@ class commander_view_channel:
 		print "commander class started"
 	
 	def change_turret_angle(self):
-		return "change the angle of turrent from current to the view angle"
+		commander=commander_get_display_unit()
+		y=commander.get_turrent_angle()
+		x=int(raw_input("enter your new turret angle"))
+		new_angle=(y-x)
+		print "new angle is" , 
+		print new_angle
+		print "change the angle of turrent from current to the view angle"
+		return new_angle
 
 	def override_gunner_angle(self):
 		return "irrespective of what gunner is aimming for the turret moves on commander command"
@@ -111,7 +132,10 @@ class commander_get_display_unit:
 		print "the display of commander started"
 
 	def get_turrent_angle(self):
-		return "get the current tank turret angle"
+		x=0;
+		print "get the current tank turret angle"
+		return x
+		
 
 	def get_commander_viewpoint(self):
 		return "get the angle at which commander is viewing"
@@ -181,6 +205,35 @@ def menu1_cmd(y):
 def menu2():
 	print "******************************************************************************"
 	print "		Gunner Interface console								"
+	commander=commander_get_display_unit()
+	print commander.get_turrent_angle()
+	print commander.get_commander_viewpoint()
+	print commander.get_gunner_view()
+	print commander.get_gunner_angle()
+	print commander.get_arm_selected()
+	print commander.get_movement()
+	print "press 1 for change turret angle"
+	#print "press 2 for override gunner angle"
+	print "press 2 for changing back to gunner's angle"
+	print "press 3 for changing arms"
+	print "press 4 for changing movement of turrent option"
+	print "press 5 to exit"
+	print "*******************************************************************************"
+	y=int(raw_input("enter your number"))
+	return y
+
+def menu2_cmd():
+	commander=commander_view_channel()
+	if(y==1):
+		commander.change_turret_angle()
+	elif(y==2):
+		commander.last_gunner_angle()
+	elif(y==3):
+		commander.change_arm()
+	elif(y==4):
+		commander.select_movement()
+	else:
+		print "wrong input"
 
 
 def menu3():
@@ -239,8 +292,11 @@ def main():
 
 		while (x==2):
 			y=menu2()
-			while (y!=4):
-				menu2()
+			while (y!=5):
+				menu2_cmd(y)
+				y=menu2()
+			if(y==5):
+				break
 
 		while (x==3):
 			y=menu3()
